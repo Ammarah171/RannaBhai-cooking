@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2 } from 'lucide-react';
 import axios from 'axios';
 import '../css/AdminPanel.css';
-
+import api from '../api';
 const AdminPanel = () => {
     const [activeTab, setActiveTab] = useState('faq');
     const [isOpen, setIsOpen] = useState(false);
