@@ -21,7 +21,7 @@ const RecipeDetails = () => {
   useEffect(() => {
     const fetchRecipe = async () => {
         try {
-            const response = await axios.get(`http://localhost:1240/recipe/${id}`);
+            const response = await axios.get(`${process.env.REACT_APP_API_URL || ''}/recipe/${id}`);
             console.log('Fetched recipe:', response.data); // Log the fetched recipe
             setRecipe(response.data); // Set the recipe data
             setLoading(false); // Set loading to false after data is fetched

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../css/MealPlanner.css';
-
+import api from '../api';
 const MealPlanner = () => {
     const [targetCalories, setTargetCalories] = useState('');
     const [mealPlan, setMealPlan] = useState(null);
@@ -18,7 +18,7 @@ const MealPlanner = () => {
 
     const fetchMeals = async () => {
         try {
-            const response = await axios.get('http://localhost:1240/meals');
+            const response = await api.get('/meals');
             const categorizedMeals = {
                 breakfast: response.data.filter(meal => meal.category === 'Breakfast'),
                 lunch: response.data.filter(meal => meal.category === 'Lunch'),

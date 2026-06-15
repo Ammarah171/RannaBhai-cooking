@@ -44,7 +44,7 @@ const NearMe = () => {
   }
   const fetchStores = async () => {
     try {
-      const response = await axios.get('http://localhost:1240/stores', {
+      const response = await api.get('/stores', {
         params: {
           latitude: userLocation.lat,
           longitude: userLocation.lng,

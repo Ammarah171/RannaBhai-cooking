@@ -425,7 +425,7 @@ router.post("/api/login", async (req, res) => {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    const token = jwt.sign({ userId: user._id }, "your_secret_key", { expiresIn: "1h" });
+    const token = jwt.sign({ userId: user._id }, "process.env.JWT_SECRET", { expiresIn: "1h" });
     res.json({ token });
   } catch (error) {
     console.error("Error during login:", error);
@@ -438,7 +438,7 @@ function authenticateToken(req, res, next) {
   const token = req.headers.authorization?.split(" ")[1];
   if (!token) return res.sendStatus(401);
 
-  jwt.verify(token, "your_secret_key", (err, user) => {
+  jwt.verify(token, "process.env.JWT_SECRET", (err, user) => {
     if (err) return res.sendStatus(403);
     req.user = user;
     next();

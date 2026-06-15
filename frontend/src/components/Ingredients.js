@@ -14,7 +14,7 @@ function Ingredients() {
   useEffect(() => {
     const fetchIngredients = async () => {
       try {
-        const response = await fetch('http://localhost:1240/Ingredients');
+        const response = await fetch(`${process.env.REACT_APP_API_URL || ''}/Ingredients`);
         if (!response.ok) {
           throw new Error('Failed to fetch ingredients');
         }

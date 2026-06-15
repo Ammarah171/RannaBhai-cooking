@@ -28,7 +28,7 @@ const AdminPanel = () => {
 
     const fetchFAQs = async () => {
         try {
-            const response = await axios.get('http://localhost:1240/faqs');
+            const response = await api.get('/faqs');
             setFaqs(response.data);
         } catch (error) {
             console.error('Error fetching FAQs:', error);
@@ -36,7 +36,7 @@ const AdminPanel = () => {
     };
     const fetchMeals = async () => {
         try {
-            const response = await axios.get('http://localhost:1240/meals');
+            const response = await api.get('/meals');
             setMeals(response.data);
         } catch (error) {
             console.error('Error fetching meals:', error);

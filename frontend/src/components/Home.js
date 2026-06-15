@@ -13,7 +13,7 @@ function Home() {
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await fetch('http://localhost:1240/recipes'); 
+        const response = await fetch(`${process.env.REACT_APP_API_URL || ''}/recipes`); 
         if (!response.ok) {
           throw new Error('Failed to fetch recipes');
         }

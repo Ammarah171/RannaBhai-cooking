@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../css/FAQ.css';
 import axios from 'axios';
-
+import api from '../api';
 
 const FAQ = () => {
   const [faqs, setFaqs] = useState([]);
@@ -15,7 +15,7 @@ const FAQ = () => {
   const fetchFAQs = async () => {
     try {
       // Replace with your actual API endpoint
-      const response = await axios.get('http://localhost:1240/faqs');
+      const response = await api.get('/faqs');
       setFaqs(response.data);
       setError(null);
     } catch (err) {
