@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import api from '../api';
 
 function Ingredients() {
   const [ingredients, setIngredients] = useState([]);
@@ -14,12 +15,8 @@ function Ingredients() {
   useEffect(() => {
     const fetchIngredients = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL || ''}/Ingredients`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch ingredients');
-        }
-        const data = await response.json();
-        setIngredients(data);
+        const response = await api.get('/Ingredients');
+        setIngredients(response.data);
       } catch (err) {
         console.error(err.message);
       }

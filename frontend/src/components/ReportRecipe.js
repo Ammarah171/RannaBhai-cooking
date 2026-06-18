@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./../Customcss/ReportRecipe.css";
+import api from '../api';
 
 function AllRecipes() {
   const [recipes, setRecipes] = useState([]);
@@ -12,7 +13,7 @@ function AllRecipes() {
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await axios.get("http://localhost:1240/api/all-recipes");
+        const response = await api.get('/api/all-recipes');
         setRecipes(response.data);
       } catch (error) {
         console.error("Error fetching recipes:", error);
@@ -30,7 +31,7 @@ function AllRecipes() {
         return;
       }
 
-      await axios.post(`http://localhost:1240/api/recipe/report/${recipeId}`, {
+      await api.post(`/api/recipe/report/${recipeId}`, {
         reportMessage,
       });
 

@@ -2,6 +2,7 @@ import React from 'react';
 
 import axios from "axios";
 import { useEffect, useState } from "react";
+import api from '../api';
 
 const AboutUs = () => {
   const [aboutContent, setAboutContent] = useState(null);
@@ -9,7 +10,7 @@ const AboutUs = () => {
   useEffect(() => {
     const fetchAboutUsContent = async () => {
       try {
-        const response = await axios.get("http://localhost:1240/about-us");
+        const response = await api.get('/about-us');
         setAboutContent(response.data);
       } catch (error) {
         console.error("Error fetching About Us content:", error);

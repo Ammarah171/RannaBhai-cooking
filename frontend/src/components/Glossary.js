@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import api from '../api';
 
 const Glossary = () => {
   const [glossaryTerms, setGlossaryTerms] = useState([]); // State to store glossary terms
@@ -12,7 +13,7 @@ const Glossary = () => {
     const fetchGlossaryTerms = async () => {
       try {
         console.log("Fetching glossary terms...");
-        const response = await axios.get("http://localhost:1240/glossary"); // Replace with your backend endpoint
+        const response = await api.get('/glossary'); // Replace with your backend endpoint
         console.log("Response:", response.data);
         setGlossaryTerms(response.data); // Set the glossary terms
         setLoading(false); // Set loading to false after data is fetched

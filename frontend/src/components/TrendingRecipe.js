@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./../Customcss/TrendingRecipe.css";
+import api from '../api';
 
 function TrendingRecipe() {
   const [recipes, setRecipes] = useState([]);
@@ -9,7 +10,7 @@ function TrendingRecipe() {
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await axios.get("http://localhost:1240/api/trending-recipes");
+        const response = await api.get('/api/trending-recipes');
         setRecipes(response.data);
       } catch (error) {
         console.error("Error fetching recipes:", error);
@@ -44,15 +45,14 @@ function TrendingRecipe() {
       );
       setRecipes(updatedRecipes);
 
-      await axios.put(
-        `http://localhost:1240/api/recipe/vote/${recipeId}`,
+      await api.put(`/api/recipe/vote/${recipeId}`,
         {
           like_count: updatedVotes.like_count,
           dislike_count: updatedVotes.dislike_count,
         }
       );
 
-      const refreshedRecipes = await axios.get("http://localhost:1240/api/trending-recipes");
+      const refreshedRecipes = await api.get('/api/trending-recipes');
       setRecipes(refreshedRecipes.data);
     } catch (error) {
       console.error("Error updating votes:", error);

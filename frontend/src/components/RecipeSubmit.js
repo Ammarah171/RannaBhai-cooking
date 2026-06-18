@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../css/SubmitRecipe.css';
+import api from '../api';
 
 const SubmitRecipe = () => {
   const [formData, setFormData] = useState({
@@ -35,7 +36,7 @@ const SubmitRecipe = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:1240/submit-recipe', formData);
+      await api.post('/submit-recipe', formData);
       alert('Recipe submitted successfully!');
     } catch (error) {
       console.error('Error submitting recipe:', error);

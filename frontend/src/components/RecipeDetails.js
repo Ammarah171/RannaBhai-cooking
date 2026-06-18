@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams} from "react-router-dom"; 
-import axios from "axios";
+import api from '../api';
 import "./RecipeDetails.css";
 import {
   FacebookShareButton,
@@ -21,7 +21,7 @@ const RecipeDetails = () => {
   useEffect(() => {
     const fetchRecipe = async () => {
         try {
-            const response = await axios.get(`${process.env.REACT_APP_API_URL || ''}/recipe/${id}`);
+            const response = await api.get(`/recipe/${id}`);
             console.log('Fetched recipe:', response.data); // Log the fetched recipe
             setRecipe(response.data); // Set the recipe data
             setLoading(false); // Set loading to false after data is fetched
@@ -38,7 +38,7 @@ const RecipeDetails = () => {
 const handleReviewSubmit = async (e) => {
   e.preventDefault();
   try {
-      const response = await axios.post(`http://localhost:1240/recipe/${id}/reviews`, newReview);
+      const response = await api.post(`/recipe/${id}/reviews`, newReview);
       setRecipe((prevRecipe) => ({
           ...prevRecipe,
           review_list: [...prevRecipe.review_list, response.data],

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import jsPDF from 'jspdf'; 
+import api from '../api';
 
 function Home() {
   const navigate = useNavigate();
@@ -13,12 +14,8 @@ function Home() {
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL || ''}/recipes`); 
-        if (!response.ok) {
-          throw new Error('Failed to fetch recipes');
-        }
-        const data = await response.json();
-        setRecipes(data);
+        const response = await api.get('/recipes');
+        setRecipes(response.data);
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -47,14 +44,7 @@ function Home() {
         })
       );
 
-      const response = await fetch(`http://localhost:1240/recipes/${recipeId}/like`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to update like count');
-      }
+      await api.post(`/recipes/${recipeId}/like`);
     } catch (err) {
       console.error(err.message);
     }
@@ -79,14 +69,7 @@ function Home() {
         })
       );
 
-      const response = await fetch(`http://localhost:1240/recipes/${recipeId}/dislike`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to update dislike count');
-      }
+      await api.post(`/recipes/${recipeId}/dislike`);
     } catch (err) {
       console.error(err.message);
     }

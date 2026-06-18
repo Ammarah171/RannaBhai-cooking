@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import api from '../../api';
 
 function UserDashboard() {
   const [likedRecipes, setLikedRecipes] = useState([]);
@@ -11,11 +12,11 @@ function UserDashboard() {
       try {
         const token = localStorage.getItem("token"); // Retrieve JWT from localStorage
 
-        const likedResponse = await axios.get("http://localhost:1240/api/user/liked-recipes", {
+        const likedResponse = await api.get('/api/user/liked-recipes', {
           headers: { Authorization: `Bearer ${token}` },
         });
 
-        const reportedResponse = await axios.get("http://localhost:1240/api/user/reported-issues", {
+        const reportedResponse = await api.get('/api/user/reported-issues', {
           headers: { Authorization: `Bearer ${token}` },
         });
 

@@ -3,6 +3,10 @@ const express = require('express');
 const router = express.Router();
 const { Recipe, Ingredient } = require('../models/schemas'); // Import Recipe model
 
+router.get('/', (req, res) => {
+  res.send('Backend is running');
+});
+
 // Get all recipes
 router.get('/recipes', async (req, res) => {
     try {

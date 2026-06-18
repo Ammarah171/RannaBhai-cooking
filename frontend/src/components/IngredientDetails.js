@@ -14,7 +14,7 @@ function IngredientDetails() {
     const fetchIngredientDetails = async () => {
       try {
         console.log(`Fetching details for ingredient ID: ${id}`);
-        const response = await fetch(`http://localhost:1240/Ingredients/${id}`);
+        const response = await api.get(`/Ingredients/${id}`);
         console.log(response)
         if (!response.ok) {
           throw new Error('Failed to fetch ingredient details');

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import api from '../../api';
 
 function AdminPanel() {
   const [recipes, setRecipes] = useState([]);
@@ -14,7 +15,7 @@ function AdminPanel() {
   const fetchRecipes = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("http://localhost:1240/api/admin/recipes", {
+      const response = await api.get('/api/admin/recipes', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setRecipes(response.data);
@@ -26,7 +27,7 @@ function AdminPanel() {
   const fetchReports = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("http://localhost:1240/api/admin/reports", {
+      const response = await api.get('/api/admin/reports', {
         headers: { Authorization: `Bearer ${token}` },
       });
       setReports(response.data);
@@ -38,7 +39,7 @@ function AdminPanel() {
   const deleteRecipe = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:1240/api/admin/recipe/${id}`, {
+      await api.delete(`/api/admin/recipe/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setMessage("Recipe deleted successfully.");

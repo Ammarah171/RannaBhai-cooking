@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./../Customcss/Contact.css"; // Import the CSS
+import api from '../api';
 
 function Contact() {
   const [email, setEmail] = useState("");
@@ -19,8 +20,8 @@ function Contact() {
   }, []);
 
   const axiosFetchData = async (processing) => {
-    await axios
-      .get("http://localhost:1240/users")
+    await api
+      .get('/users')
       .then((res) => {
         if (processing) {
           setSelectData(res.data);
@@ -36,7 +37,7 @@ function Contact() {
       message: message,
     };
     try {
-      const response = await axios.post("http://localhost:1240/contact", postData);
+      const response = await api.post('/contact', postData);
       setError(<p className="success">{response.data}</p>);
     } catch (err) {
       console.error("Axios Error:", err);

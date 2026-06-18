@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import api from '../api';
 
 const HealthRecommendations = () => {
   const [recommendations, setRecommendations] = useState([]); // State to store health recommendations
@@ -11,7 +12,7 @@ const HealthRecommendations = () => {
   const axiosFetchData = async () => {
     try {
       // Send a GET request to your backend API to fetch the recommendations
-      const response = await axios.get("http://localhost:1240/health"); // Update this URL to your backend endpoint
+      const response = await api.get('/health'); // Update this URL to your backend endpoint
       setRecommendations(response.data); // Set the recommendations in state
       setLoading(false); // Set loading to false after data is fetched
       setError(""); // Clear error (if any)

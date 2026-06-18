@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import "./RecipeDetails.css";
+import api from '../api';
 
 const Search = () => {
   // Separate states for each search field
@@ -23,7 +24,7 @@ const Search = () => {
     }
 
     try {
-      const response = await axios.get(`http://localhost:1240/${searchType}`, {
+      const response = await api.get(`/${searchType}`, {
         params: { q: query },
       });
       setError(null);

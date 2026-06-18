@@ -2,6 +2,7 @@ import React from 'react';
 import '../css/RecipeOfTheDay.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import api from '../api';
 
 const RecipeOfTheDay = () => {
   const [loading, setLoading] = useState(true);
@@ -12,7 +13,7 @@ const RecipeOfTheDay = () => {
     const fetchRecipeOfTheDay = async () => {
       try {
         console.log('about to fetch');
-        const response = await axios.get("http://localhost:1240/recipe-of-the-day");
+        const response = await api.get('/recipe-of-the-day');
         console.log(response.data);
         setRecipe(response.data);
         setLoading(false);

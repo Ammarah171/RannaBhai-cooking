@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
+import api from '../../api';
 
 function Signup() {
   const [formData, setFormData] = useState({ username: "", email: "", password: "" });
@@ -13,7 +14,7 @@ function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:1240/api/signup", formData);
+      await api.post('/api/signup', formData);
       setMessage("Signup successful! Redirecting to login...");
       setTimeout(() => (window.location.href = "/login"), 2000); // Redirect after 2 seconds
     } catch (error) {

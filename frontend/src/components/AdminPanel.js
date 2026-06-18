@@ -70,7 +70,7 @@ const AdminPanel = () => {
     const handleMealDelete = async (id) => {
         if (window.confirm('Are you sure you want to delete this meal?')) {
             try {
-                await axios.delete(`http://localhost:1240/delete-meal/${id}`);
+                await api.delete(`/delete-meal/${id}`);
                 fetchMeals();
             } catch (error) {
                 console.error('Error deleting meal:', error);
@@ -84,9 +84,9 @@ const AdminPanel = () => {
 
         try {
             if (isEditing) {
-                await axios.put(`http://localhost:1240/update-meal/${mealFormData.id}`, mealFormData);
+                await api.put(`/update-meal/${mealFormData.id}`, mealFormData);
             } else {
-                await axios.post('http://localhost:1240/add-new-meal', mealFormData);
+                await api.post('/add-new-meal', mealFormData);
             }
             fetchMeals();
             setMealFormData({ name: '', description: '', calories: '', image: '', category: 'Breakfast', id: null });
@@ -121,7 +121,7 @@ const AdminPanel = () => {
         if (window.confirm('Are you sure you want to delete this FAQ?')) {
             try {
                 console.log('Deleting FAQ with ID:', id);
-                await axios.delete(`http://localhost:1240/delete-faq/${id}`);
+                await api.delete(`/delete-faq/${id}`);
                 fetchFAQs();
             } catch (error) {
                 console.error('Error deleting FAQ:', error);
@@ -135,9 +135,9 @@ const AdminPanel = () => {
 
         try {
             if (isEditing) {
-                await axios.put(`http://localhost:1240/update-faq/${formData.id}`, formData);
+                await api.put(`/update-faq/${formData.id}`, formData);
             } else {
-                await axios.post('http://localhost:1240/add-new-faq', formData);
+                await api.post('/add-new-faq', formData);
             }
             fetchFAQs();
             setFormData({ question: '', answer: '', id: null });
